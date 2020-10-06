@@ -1,0 +1,71 @@
+.web-ticker-container *{
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	box-sizing:border-box;
+	font-family:Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.web-ticker-container {
+	width: 100%;
+	background: #000;
+	float: left;
+	display: inline-block;
+	overflow: hidden;
+	box-sizing: border-box;
+	height: 35px;
+	position: relative;
+	cursor: pointer;
+	font-size: 25px;
+}
+
+.ticker-sibling {
+	background: #fff;
+	width: 15%;
+	height: 45px;
+	/*line-height: 42px;*/
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+	text-align: center;
+	float: left;
+	left: 0;
+	z-index: 100000;
+}
+
+.web-ticker, *[class^="web-ticker"] {
+	display: inline-block;
+	white-space: nowrap;	
+	position:absolute;
+}
+
+.web-ticker{
+	margin-left: 15%;
+}
+
+#web_ticker-items{
+	display: inline-block;
+	padding: 5px;
+	margin: 0;
+	height: 45px;
+	position: relative;
+}
+
+#web_ticker-items li{
+	display: inline-block;
+	line-height: 35px;
+	color: #fff;
+	
+}
+
+
+#web_ticker-items li:after{
+	content: "";
+	margin: 2em;
+}
+
+#web_ticker-items>li{
+	font-family: arial;
+	font-size: 25px;
+	font-weight: bold;
+	
+}

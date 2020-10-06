@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- <link rel="icon" href="http://getbootstrap.com/favicon.ico"> -->
+
+  <title>Scoreboard</title>
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <!-- Normalise css -->
+  <link rel="stylesheet" type="text/css" href="css/normalise.css">
+  <!-- For Jquery Web Ticker-->
+  <link rel="stylesheet" href="plugins/jquery_web_ticker/web_ticker.css" />
+  <!-- Fonts -->
+  <link rel="stylesheet" type="text/css" href="css/fonts.css">
+  <!-- Custom Scoreboard css -->
+  <link rel="stylesheet" type="text/css" href="css/custom_scoreboard.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="header">
+
+    </div>
+    <!-- /. header -->
+    <div class="body">
+      <canvas id="canvas" style="z-index: 1000;">ttt</canvas>
+      <div class="row">
+        <div class="col-md-7">
+          <div id="buttons">
+
+          </div>
+          <!-- /. buttons -->
+        </div>
+        <!-- /. col -->
+        <div class="col-md-5">
+          <!-- Circle Buttons excluded -->
+          <div class="scoreboard-header" align="center">
+            <span><img src="images/uttara_club_logo_1.png" width="271" height="56"></span>
+            <h1>HOUSIE<strong> SCOREBOARD</strong></h1>
+          </div>
+          <!-- /. scoreboard-header -->
+          <!-- Circle Buttons excluded -->
+          <div class="scoreboard-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h3>CURRENT CALL</h3>
+                <input id="current_call" type="button" class="btn btn-circle btn-xxl-current" />
+                <div id="current_call_count"><h1></h1></div>
+              </div>
+              <!-- /. col -->
+              <div class="col-md-6">
+                <h3>PREVIOUS CALL</h3>
+                <input id="previous_call" type="button" class="btn btn-circle btn-xxl-prev"/>
+                <div id="previous_call_count"><h2></h2></div>
+              </div>
+              <!-- /. col -->
+            </div>
+            <!-- /. row -->
+            <br><br>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="round" id="round">
+
+                </div>
+              </div>
+              <!-- /. col -->
+              <div class="col-md-6">
+                <div class="score_money" id="score_money">
+
+
+                </div>
+                <!-- /. score_money -->
+              </div>
+              <!-- /. col -->
+            </div>
+            <!-- /. row -->
+          </div>
+          <!-- /. scoreboard-body -->
+        </div>
+        <!-- /. col -->
+      </div>
+      <!-- /. row -->
+    </div>
+    <!-- ./ body -->
+    
+  </div>
+  <!-- /. container-fluid -->
+
+  <div class="footer">
+    <div class="web-ticker-container">
+      <div class="ticker-sibling">
+        <span><img src="images/logo_psionic_5.png" width="280" height="35"></span>
+      </div>
+    </div>
+    <div class="web-ticker" id="ticker_test">
+      <ul id="web_ticker-items" class="text_from_modal">
+        <li>Welcome to UCL BUMPER HOUSIE</li>
+        <li>In UCB Family Lounge, Uttara Club Limited</li>
+        <li>3rd & 4th Round, 1st House Sponsored by: Imrul Anwar Liton (DM-126)</li>
+        <li>5th Round, 1st & 2nd House  Sponsored by: Nasir U Mahmood.  President, Uttara Club Limited</li>
+        <li>Snow Ball Tk. 2.5 Lac within 36 calls.  Sponsored by: Assurance Developments</li>
+        <li>Powered By Psionic Interactive Limited</li>
+      </ul>
+    </div>
+  </div>
+  <!-- /. footer -->
+
+
+  <!-- Bootstrap core JavaScript
+  ================================================== -->
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="/js/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+  <script src="/js/bootstrap.min.js"></script>
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <script src="/js/ie10-viewport-bug-workaround.js"></script>
+  <!-- Jquery Web Ticker Plugin -->
+  <script src="plugins/jquery_web_ticker/jquery.webticker.min.js"></script>
+  <!-- Socket -->
+  <script src="/socket.io/socket.io.js"></script>
+  <!-- Page Script -->
+  <script>
+    function storeValue(t){if(-1!=jQuery.inArray(t,buttons,0));else{buttons.push(t),changeColor(),callCount();var n=buttons[buttons.length-1],o=buttons[buttons.length-2];$("#current_call").val($(n).val()),$("#previous_call").val($(o).val())}}function changeColor(){var t=buttons[buttons.length-1],n=buttons[buttons.length-2];$(t).removeClass(),$(t).toggleClass("btn button-green"),$(n).removeClass(),$(n).toggleClass("btn button-red");for(var o=buttons.length-3;o>=buttons.length-3;o--)$(buttons[o]).removeClass(),$(buttons[o]).toggleClass("btn button-white")}function callCount(){call_count_current=buttons.indexOf(buttons[buttons.length-1])+1,call_count_previous=call_count_current-1,-1==call_count_previous&&(call_count_previous=0),$("#current_call_count").html("<h6>CALL NUMBER: </h6><h4>"+call_count_current+"</h4>"),$("#previous_call_count").html("<h6>CALL NUMBER: </h6><h4>"+call_count_previous+"</h4>")}function changesOnUndo(t){var n=t,o=buttons[buttons.length-1],e=buttons[buttons.length-2];$(n).removeClass(),$(n).toggleClass("btn button-grey"),$(o).removeClass(),$(o).toggleClass("btn button-green"),$(e).removeClass(),$(e).toggleClass(" btn button-red");for(var s=buttons.length-3;s>=buttons.length-3;s--)$(buttons[s]).removeClass(),$(buttons[s]).toggleClass("btn button-white");callCount()}function changesOnReset(){for(var t=buttons.length-1;t>=0;t--)$(buttons[t]).removeClass(),$(buttons[t]).toggleClass("btn button-grey");$("#current_call").val(""),$("#previous_call").val(""),$("#current_call_count").html("<h6>CALL NUMBER: </h6><h4>0</h4>"),$("#previous_call_count").html("<h6>CALL NUMBER: </h6><h4>0</h4>")}$(document).ready(function(){var t=99,n=$("#buttons"),o=1,e=1,s=1,l=new Date,u=l.getTime();if(15082632e5>u)for(var a=1;t>=a;a++)9>=o?(n.append('<span style="padding:5px;"><input type="button" class="btn btn-num button-grey " id="button'+s+'" value="'+s+'"/></span>'),s+=10,o+=1):(n.append("<br>"),o=1,e+=1,s=e);else alert("YOUR LICENSE HAS EXPIRED!");$("#web_ticker-items").webTicker({duplicate:!0,hoverpause:!1}),window.onbeforeunload=function(){return"Data will be lost if you leave the page, are you sure?"}});var buttons=[],call_count_current=0,call_count_previous=0,socket=io();socket.on("update board",function(t){var n="#button"+t;storeValue(n)}),socket.on("undo last",function(){var t=buttons.pop(),n=buttons[buttons.length-1],o=buttons[buttons.length-2];$("#current_call").val($(n).val()),$("#previous_call").val($(o).val()),changesOnUndo(t)}),socket.on("reset board",function(){changesOnReset(),buttons=[]}),socket.on("reset all",function(){changesOnReset(),buttons=[],$("#round").html(""),$("#score_money").html("")}),socket.on("ticker text",function(t){$("#web_ticker-items").webTicker("update",t,"swap",!0,!1)}),socket.on("winner fireworks",function(t){t?($("canvas").css("display","inline"),t=!1):($("canvas").css("display","none"),t=!0)}),socket.on("update round",function(t,n,o,e){$("#score_money").html('<h1 id="money_info">PRIZE</h1>'),$.each(o,function(t,n){null!==n&&$("#money_info").append('<h2 id="prize'+t+'">'+n+"</h2>")}),"Choose..."!==t?($("#round").html('<h1 id="round_number">'+t+"</h1>"),$.each(n,function(t,n){"Choose..."!==n&&$("#round_number").append('<h2 id="obj'+t+'">'+n+"</h2>")})):($("#round").html(""),$("#score_money").html("")),$.each(e,function(t,n){n?$("#obj"+t).addClass("tick"):($("#obj"+t).css("color","grey"),$("#prize"+t).css("color","grey"))})});
+  </script>
+
+</body>
+</html>
